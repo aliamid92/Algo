@@ -30,7 +30,7 @@ public class Main {
         binaryTree.Print(binaryTree.getRoot());
 //
         System.out.println("=============================");
-        System.out.println(binaryTree.getRoot().leftNode.leftNode.key +" " + binaryTree.getRoot().leftNode.rightNode.key);
+//        System.out.println(binaryTree.getRoot().leftNode.leftNode.key +" " + binaryTree.getRoot().leftNode.rightNode.key);
 
 //        binaryTree.deleteNode(node3);
 //        binaryTree.deleteNode(node7);
