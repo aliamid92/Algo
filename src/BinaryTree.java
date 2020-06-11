@@ -73,16 +73,16 @@ public class BinaryTree {
     public boolean deleteNode(Node node) {
         Node currentNode = this.root;
         Node parent = this.root;
-        boolean IsItALeftChild = true;
+        boolean IsItALeftNode = true;
         while (node.key != currentNode.key) {
             parent = currentNode;
 
             if (node.key < currentNode.key) {
                 currentNode = currentNode.leftNode;
-                IsItALeftChild = true;
+                IsItALeftNode = true;
             } else {
                 currentNode = currentNode.rightNode;
-                IsItALeftChild = false;
+                IsItALeftNode = false;
 
             }
             if (currentNode == null) {
@@ -94,7 +94,7 @@ public class BinaryTree {
         if (currentNode.leftNode == null && currentNode.rightNode == null) {
             if (currentNode == this.root) {
                 this.root = null;
-            } else if (IsItALeftChild) {
+            } else if (IsItALeftNode) {
                 parent.leftNode = null;
             } else {
                 parent.rightNode = null;
@@ -102,7 +102,7 @@ public class BinaryTree {
         } else if (currentNode.rightNode == null) {
             if (currentNode == this.root) {
                 this.root = currentNode.leftNode;
-            } else if (IsItALeftChild) {
+            } else if (IsItALeftNode) {
                 parent.leftNode = currentNode.leftNode;
             } else {
                 parent.rightNode = currentNode.leftNode;
@@ -110,7 +110,7 @@ public class BinaryTree {
         } else if (currentNode.leftNode == null) {
             if (currentNode == root) {
                 this.root = currentNode.rightNode;
-            } else if (IsItALeftChild) {
+            } else if (IsItALeftNode) {
                 parent.leftNode = currentNode.rightNode;
             } else {
                 parent.rightNode = currentNode.rightNode;
@@ -118,7 +118,7 @@ public class BinaryTree {
         } else {
             if (currentNode == this.root) {
                 parent.leftNode = currentNode.rightNode;
-            } else if (IsItALeftChild) {
+            } else if (IsItALeftNode) {
                 Node leftChild = currentNode.leftNode;
                 parent.leftNode = currentNode.rightNode;
                 parent.leftNode.leftNode = leftChild;

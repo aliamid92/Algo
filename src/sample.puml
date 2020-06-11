@@ -1,11 +1,9 @@
 @startuml
 digraph G {
-graph [ dpi = 150 ]
-nodesep=0.3;
-ranksep=0.2;
-margin=0.1;
+graph [ dpi = 200 ]
+node [fontname=Arial ];
 node [shape=circle];
-edge [arrowsize=0.8];
+edge [arrowsize=1];
 node1 [label="5"];
 node1 -> node2;
 node2 [label="2"];

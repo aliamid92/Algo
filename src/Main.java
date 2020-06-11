@@ -4,9 +4,11 @@ import java.io.IOException;
 
 public class Main {
 
-    static BinaryTree binaryTree;
+
     public static void main(String[] args) {
-	    Node node1 = new Node(1);
+
+	    //Create Nodes for our BinaryTree
+        Node node1 = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(3);
         Node node4 = new Node(4);
@@ -16,7 +18,10 @@ public class Main {
         Node node8 = new Node(8);
         Node node9 = new Node(9);
 
-        binaryTree = new BinaryTree("binarytree");
+        //Create a new BinaryTree Object, and add any node from the above
+        //The first Node you add to the BinaryTree will be the root
+
+        BinaryTree binaryTree = new BinaryTree("binarytree");
         binaryTree.addNode(node5);
         binaryTree.addNode(node2);
         binaryTree.addNode(node7);
@@ -26,11 +31,10 @@ public class Main {
 //        binaryTree.addNode(node7);
         binaryTree.addNode(node8);
         binaryTree.addNode(node4);
-
+        //Use Print() method of BinaryTree class to print the keys of nodes on the terminal in ascending order.
         binaryTree.Print(binaryTree.getRoot());
-//
         System.out.println("=============================");
-//        System.out.println(binaryTree.getRoot().leftNode.leftNode.key +" " + binaryTree.getRoot().leftNode.rightNode.key);
+        // Use deleteNode() method of BinaryTree class to remove a Node from the tree
 
 //        binaryTree.deleteNode(node3);
 //        binaryTree.deleteNode(node7);
@@ -39,59 +43,69 @@ public class Main {
 //        binaryTree.deleteNode(node1);
 //        binaryTree.Print(binaryTree.getRoot());
 //        System.out.println("=====================");
+        //Use find() method of BinaryTree class to find a Node in the BinaryTree
 //
 //        Node node12 = new Node(12);
 //        binaryTree.addNode(node12);
 //        binaryTree.Print(binaryTree.getRoot());
         System.out.println("===============");
-        String data =getDotFile(binaryTree);
+        printBST(binaryTree);
+
+
+
+
+
+    }
+
+
+    // this method will go through the BinaryTree and will create tree.gv file in the directory
+    public static void printBST(BinaryTree tree){
+        String BSTDescription = BSTtoString(tree);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("tree.gv"));
-            writer.write(data);
+            writer.write(BSTDescription);
             writer.close();
+            System.out.println("tree.gv file has been created");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-
     }
 
 
-    public static String getDotFile(BinaryTree t){
-        StringBuilder sb = new StringBuilder();
-        sb.append("digraph G {\n");
-        sb.append("graph [ dpi = 150 ]\n");
-        sb.append("nodesep=0.3;\n");
-        sb.append("ranksep=0.2;\n");
-        sb.append("margin=0.1;\n");
-        sb.append("node [shape=circle];\n");
-        sb.append("edge [arrowsize=0.8];\n");
+    private static String BSTtoString(BinaryTree tree){
+        StringBuilder BSTStatement = new StringBuilder();
+        BSTStatement.append("digraph G {\n");
+        BSTStatement.append("graph [ dpi = 200 ]\n");
+        BSTStatement.append("node [fontname=Arial ];\n");
+        BSTStatement.append("node [shape=circle];\n");
+        BSTStatement.append("edge [arrowsize=1];\n");
 
-        StringBuilder treeContent = getDotTreeContent(new StringBuilder(), binaryTree.getRoot(), 1);
-        sb.append(treeContent);
+        StringBuilder treeContent = getTreeContent(new StringBuilder(), tree.getRoot(), 1);
+        BSTStatement.append(treeContent);
 
-        sb.append("}");
+        BSTStatement.append("}");
+        String BSTStatementToString =BSTStatement.toString();
 
-        return sb.toString();
+        return BSTStatementToString;
     }
 
-    // Pre: N is not null.
-// This won't work for larger unbalanced trees (int overflow), but then again you probably
-// wouldn't be displaying them anyway, so this is good enough for now.
-    private static StringBuilder getDotTreeContent(StringBuilder sb, Node n, int i){
-        sb.append(String.format("node%d [label=\"%d\"];\n", i, n.key));
-        int lChild = 2*i;
-        int rChild = 2*i + 1;
 
-        if(n.leftNode  != null){
-            sb.append(String.format("node%d -> node%d;\n", i, lChild));
-            getDotTreeContent(sb, n.leftNode, lChild);
+    private static StringBuilder getTreeContent(StringBuilder BSTStatement, Node node, int nodeIdentifier){
+        BSTStatement.append(String.format("node%d [label=\"%d\"];\n", nodeIdentifier, node.key));
+        int rightNode = (2*nodeIdentifier) + 1;
+        int leftNode = 2*nodeIdentifier;
+
+
+        if(node.leftNode  != null){
+            BSTStatement.append(String.format("node%d -> node%d;\n", nodeIdentifier, leftNode));
+            getTreeContent(BSTStatement, node.leftNode, leftNode);
         }
-        if(n.rightNode != null){
-            sb.append(String.format("node%d -> node%d;\n", i, rChild));
-            getDotTreeContent(sb, n.rightNode, rChild);
+        if(node.rightNode != null){
+            BSTStatement.append(String.format("node%d -> node%d;\n", nodeIdentifier, rightNode));
+            getTreeContent(BSTStatement, node.rightNode, rightNode);
         }
-        return sb;
+        return BSTStatement;
     }
 }
