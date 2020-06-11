@@ -10,6 +10,9 @@ public class BinaryTree {
         return root;
     }
 
+
+    //This method allows to add new Nodes to your BinaryTree
+    // The first Node will be to the root
     public void addNode(Node node) {
         if (this.root == null) {
             this.root = node;
@@ -37,6 +40,7 @@ public class BinaryTree {
         }
     }
 
+    //This method will print the keys of nodes in your BinaryTree in ascending order on the terminal
     public void Print(Node node) {
         if (node != null) {
 
@@ -47,6 +51,9 @@ public class BinaryTree {
         }
 
     }
+
+    //this method will find the Node the user is looking for and will return it
+    //it also prints on the terminal whether it has been found
 
     public Node findNode(Node node) {
         Node currentNode = this.root;
@@ -69,6 +76,9 @@ public class BinaryTree {
         System.out.println("Node found");
         return currentNode;
     }
+
+    // this method will look for the node, and if it exists, it will be deleted
+    // It will also return true or false
 
     public boolean deleteNode(Node node) {
         Node currentNode = this.root;
@@ -132,50 +142,5 @@ public class BinaryTree {
         return true;
     }
 
-
-//        Node currentNode = root;
-//        Node parent;
-//        while (true){
-//            parent = currentNode;
-//            if(node.key<currentNode.key){
-//                currentNode=currentNode.leftNode;
-//                if (currentNode.key==node.key){
-//                    if ((currentNode.leftNode!=null) && (currentNode.rightNode!=null)){
-//                        parent.leftNode=currentNode.rightNode;
-//                        currentNode.rightNode.leftNode = currentNode.leftNode;
-//                        return true;
-//                    }else if ((currentNode.leftNode==null) && (currentNode.rightNode==null)){
-//                        parent.leftNode = null;
-//                        return true;
-//                    }else if((currentNode.leftNode==null) && (currentNode.rightNode!=null)){
-//                        parent.leftNode = currentNode.rightNode;
-//                        return true;
-//                    }else{
-//                        parent.leftNode =currentNode.leftNode;
-//                        return true;
-//                    }
-//                }
-//            }else{
-//                currentNode=currentNode.rightNode;
-//                if (currentNode.key==node.key){
-//                    if ((currentNode.leftNode!=null) && (currentNode.rightNode!=null)){
-//                        parent.leftNode=currentNode.rightNode;
-//                        currentNode.rightNode.leftNode = currentNode.leftNode;
-//                        return true;
-//                    }else if ((currentNode.leftNode==null) && (currentNode.rightNode==null)){
-//
-//                        parent.rightNode = null;
-//                        return true;
-//                    }else if((currentNode.leftNode==null) && (currentNode.rightNode!=null)){
-//                        parent.leftNode = currentNode.rightNode;
-//                        return true;
-//                    }else{
-//                        parent.leftNode =currentNode.leftNode;
-//                        return true;
-//                    }
-//                }
-//
-//            }
-//        }
 }
 

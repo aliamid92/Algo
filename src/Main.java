@@ -2,9 +2,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** Note: In order to create .gv file, we followed the approach given by from Francesco Andreussi
+ * in the Forum and the website https://rafal.io/posts/binary-trees.html#visualizing-a-tree-with-dotgraphviz
+ * just to get an overall Idea on how to add new statements to the String variable.
+ * the idea of creating a boolean value in delete() method in the BinaryTree to make the code shorter is derived from
+ * Derek Banas YouTube channel.
+
+*/
+
 public class Main {
 
 
+    // In this method, the user can manipulate the BinaryTree
     public static void main(String[] args) {
 
 	    //Create Nodes for our BinaryTree
@@ -28,7 +37,6 @@ public class Main {
         binaryTree.addNode(node1);
         binaryTree.addNode(node3);
         binaryTree.addNode(node6);
-//        binaryTree.addNode(node7);
         binaryTree.addNode(node8);
         binaryTree.addNode(node4);
         //Use Print() method of BinaryTree class to print the keys of nodes on the terminal in ascending order.
@@ -37,23 +45,12 @@ public class Main {
         // Use deleteNode() method of BinaryTree class to remove a Node from the tree
 
 //        binaryTree.deleteNode(node3);
-//        binaryTree.deleteNode(node7);
-//        binaryTree.deleteNode(node6);
-//        binaryTree.deleteNode(node4);
-//        binaryTree.deleteNode(node1);
-//        binaryTree.Print(binaryTree.getRoot());
-//        System.out.println("=====================");
+
         //Use find() method of BinaryTree class to find a Node in the BinaryTree
-//
-//        Node node12 = new Node(12);
-//        binaryTree.addNode(node12);
-//        binaryTree.Print(binaryTree.getRoot());
-        System.out.println("===============");
+//        binaryTree.findNode(node7);
+
+        //Use printBST() method to go through the BinaryTree and to create tree.gv file in the directory
         printBST(binaryTree);
-
-
-
-
 
     }
 
@@ -74,6 +71,7 @@ public class Main {
     }
 
 
+    // this method will write .dot language and describe the overall structure of .gv file
     private static String BSTtoString(BinaryTree tree){
         StringBuilder BSTStatement = new StringBuilder();
         BSTStatement.append("digraph G {\n");
@@ -92,6 +90,7 @@ public class Main {
     }
 
 
+    // this method will go through the BinaryTree and add Nodes in .dot language to the.gv file
     private static StringBuilder getTreeContent(StringBuilder BSTStatement, Node node, int nodeIdentifier){
         BSTStatement.append(String.format("node%d [label=\"%d\"];\n", nodeIdentifier, node.key));
         int rightNode = (2*nodeIdentifier) + 1;
